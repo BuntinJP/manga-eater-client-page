@@ -13,12 +13,12 @@ const App: React.FC = () => {
       <MainNav version="1.0.0" isLoading={isLoading} />
       <Row>
         <Col>
-          <ChannelCard isLoading={isLoading} setLoading={setLoading} />
+          <DirectoryCard />
         </Col>
         <Col>
-          <OperationCard />
+          <ChannelCard isLoading={isLoading} setLoading={setLoading} />
           <br />
-          <DirectoryCard />
+          <OperationCard />
         </Col>
       </Row>
     </div>

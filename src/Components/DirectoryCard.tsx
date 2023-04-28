@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import { Card, Button, Form, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../App.css';
+import TreeView from '@mui/lab/TreeView';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import TreeItem from '@mui/lab/TreeItem';
 interface Archive {
   title: string;
   episodes: string[];
@@ -16,6 +20,27 @@ interface DirectoryOutbound {
   titles: string[];
   outbound: Archive[];
 }
+
+const DirectoryTreeView: React.FC = () => {
+  return (
+    <TreeView
+      aria-label="file system navigator"
+      defaultCollapseIcon={<ExpandMoreIcon />}
+      defaultExpandIcon={<ChevronRightIcon />}
+      sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
+    >
+      <TreeItem nodeId="1" label="Applications">
+        <TreeItem nodeId="2" label="Calendar" />
+      </TreeItem>
+      <TreeItem nodeId="5" label="Documents">
+        <TreeItem nodeId="10" label="OSS" />
+        <TreeItem nodeId="6" label="MUI">
+          <TreeItem nodeId="8" label="index.js" />
+        </TreeItem>
+      </TreeItem>
+    </TreeView>
+  );
+};
 
 /* 
 Directory Response Example:
@@ -111,9 +136,16 @@ const DirectoryCard: React.FC = () => {
             <br />
             test
             {ifChecked ? <p>Checked</p> : <p>Not Checked</p>}
+            {/* check the object states */}
+            {directoryState.map((archive, index) => {
+              const jsonString = JSON.stringify(archive);
+              return <p>({jsonString})</p>;
+            })}
           </Form>
         </Card.Body>
       </Card>
+      <br />
+      <DirectoryTreeView />
     </>
   );
 };
