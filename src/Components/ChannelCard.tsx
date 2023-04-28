@@ -22,7 +22,6 @@ const ChannelCard: React.FC<Props> = (prop) => {
   }); //discordチャンネル名
   useEffect(() => {
     fetchChannelNames().then((channels) => {
-      console.log('fetchChannelNames was called');
       console.log(`setChannel was called with ${channels.currentName}`);
       console.log(channels);
       setChannel(channels);

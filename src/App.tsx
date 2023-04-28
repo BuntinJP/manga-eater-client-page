@@ -5,7 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import MainNav from './Components/MainNav';
 import ChannelCard from './Components/ChannelCard';
 import OperationCard from './Components/OperationCard';
-
+import DirectoryCard from './Components/DirectoryCard';
 const App: React.FC = () => {
   const [isLoading, setLoading] = React.useState<boolean>(false);
   return (
@@ -17,10 +17,10 @@ const App: React.FC = () => {
         </Col>
         <Col>
           <OperationCard />
+          <br />
+          <DirectoryCard />
         </Col>
       </Row>
-
-      {isLoading ? 'true' : 'false'}
     </div>
   );
 };
