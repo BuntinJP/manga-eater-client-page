@@ -1,27 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Dropdown, Spinner } from 'react-bootstrap';
-
-interface ChannelInfo {
-  currentName: string;
-  alt?: string[];
-}
+import * as utils from './utils';
+import type { ChannelInfo } from './utils';
 
 interface Props {
   isLoading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const fetchChannelNames = async () => {
-  const name = await fetch('http://localhost:3000/channel');
-  return await name.json();
-};
-
 const ChannelCard: React.FC<Props> = (prop) => {
   const [channel, setChannel] = useState<ChannelInfo>({
     currentName: '未取得',
   }); //discordチャンネル名
   useEffect(() => {
-    fetchChannelNames().then((channels) => {
+    utils.fetchChannelNames().then((channels) => {
       console.log(`setChannel was called with ${channels.currentName}`);
       console.log(channels);
       setChannel(channels);
@@ -30,18 +22,8 @@ const ChannelCard: React.FC<Props> = (prop) => {
   }, []);
   const changeChannel = async (index: number) => {
     prop.setLoading(true);
-    const res = await fetch('http://localhost:3000/channel', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        index,
-      }),
-    });
-    const result = await res.json();
-    console.log(result);
-    setChannel(result);
+    const dispatched = await utils.fetchChannelChange(index);
+    setChannel(dispatched);
     prop.setLoading(false);
   };
   return (

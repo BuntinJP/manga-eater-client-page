@@ -1,21 +1,30 @@
 import React, { useEffect } from 'react';
+import '../App.css';
+import { fetchDirectory } from './utils';
+/* Redux */
+import { useAppSelector, useAppDispatch } from '../hooks';
+import { changeTest, changeBool, selectTest, selectBool } from './TestSlice';
+
+/* Bootstrap */
 import { Card, Button, Form, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../App.css';
+
+/* MUI */
 import TreeView from '@mui/lab/TreeView';
+import TreeItem from '@mui/lab/TreeItem';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import TreeItem from '@mui/lab/TreeItem';
+
 interface Archive {
   title: string;
   episodes: string[];
 }
-interface ArchiveState extends Archive {
+export interface ArchiveState extends Archive {
   checkedEpisodes: number[];
   // check episodes index
 }
 
-interface DirectoryOutbound {
+export interface DirectoryOutbound {
   //(GET /directory Response)
   titles: string[];
   outbound: Archive[];
@@ -80,16 +89,15 @@ const stateInit = (dir: DirectoryOutbound) => {
   return state;
 };
 
-// handle of state in tree view
-//TODO
-const state2tree = () => {};
-const tree2state = () => {};
-
 const DirectoryCard: React.FC = () => {
+  const [text, setText] = React.useState<string>(''); //input text
   const [ifChecked, setIfChecked] = React.useState(false);
   const [directoryState, setDirectoryState] = React.useState<ArchiveState[]>(
     []
   );
+  const test = useAppSelector(selectTest);
+  const bool = useAppSelector(selectBool);
+  const dispatch = useAppDispatch();
   useEffect(() => {
     //once excuse
     fetchDirectory().then((dir) => {
@@ -100,11 +108,6 @@ const DirectoryCard: React.FC = () => {
   useEffect(() => {
     console.log('useEffect Called');
   }, []);
-  const fetchDirectory = async () => {
-    const res = await fetch('http://localhost:3000/directory');
-    const directory = (await res.json()) as DirectoryOutbound;
-    return directory;
-  };
   const type = 'checkbox';
   return (
     <>
@@ -136,16 +139,38 @@ const DirectoryCard: React.FC = () => {
             <br />
             test
             {ifChecked ? <p>Checked</p> : <p>Not Checked</p>}
-            {/* check the object states */}
-            {directoryState.map((archive, index) => {
-              const jsonString = JSON.stringify(archive);
-              return <p>({jsonString})</p>;
-            })}
           </Form>
         </Card.Body>
       </Card>
       <br />
-      <DirectoryTreeView />
+      {/* <DirectoryTreeView /> */}
+      <br />
+      <Card bg="dark" key="directory-card" text="light">
+        <Card.Header>Redux Test</Card.Header>
+        <Card.Body>
+          <code>{JSON.stringify(test)}</code>
+          <br />
+          <code>{JSON.stringify(bool)}</code>
+          <br />
+          {/* input */}
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Directory Card</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter directory"
+              onChange={(e) => setText(e.target.value)}
+            />
+          </Form.Group>
+          <br />
+          <Button variant="primary" onClick={() => dispatch(changeTest(text))}>
+            Change Test to {text}
+          </Button>
+          <br />
+          <Button variant="primary" onClick={() => dispatch(changeBool(!bool))}>
+            Change Bool
+          </Button>
+        </Card.Body>
+      </Card>
     </>
   );
 };
