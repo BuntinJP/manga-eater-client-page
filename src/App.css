@@ -8,9 +8,10 @@
   text-align: center;
 }
 
-Row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+.App-body {
+  min-height: 70vh;
+}
+
+.App > div {
+  min-height: 100%;
 }

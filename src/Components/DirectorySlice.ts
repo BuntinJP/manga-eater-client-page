@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../store';
 import { ArchiveState } from './types';
 
 const initialState: ArchiveState[] = [];
@@ -7,6 +8,9 @@ const directorySlice = createSlice({
   name: 'directory',
   initialState,
   reducers: {
+    init(state, action: PayloadAction<ArchiveState[]>) {
+      state = action.payload;
+    },
     addDirectory(state, action: PayloadAction<ArchiveState>) {
       state.push(action.payload);
     },
@@ -25,7 +29,10 @@ const directorySlice = createSlice({
   },
 });
 
-export const { addDirectory, removeDirectory, editDirectory } =
+//selector
+export const selectDirectory = (state: RootState) => state.directory;
+
+export const { init, addDirectory, removeDirectory, editDirectory } =
   directorySlice.actions;
 
 export default directorySlice.reducer;

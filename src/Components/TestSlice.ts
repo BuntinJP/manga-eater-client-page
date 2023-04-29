@@ -1,8 +1,7 @@
 //mock redux store
 // Path: src/Components/TestSlice.ts
 import { createSlice } from '@reduxjs/toolkit';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../store';
+import { RootState } from '../store';
 const initialState = {
   test: 'test',
   ifbool: false,
@@ -27,6 +26,3 @@ export const selectTest = (state: RootState) => state.test;
 export const { changeTest, changeBool } = testSlice.actions;
 
 export default testSlice.reducer;
-
-export const useAppDispatch: () => AppDispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
