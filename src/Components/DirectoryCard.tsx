@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import '../App.css';
 import { fetchDirectory } from './utils';
-/* Redux */
-import { useAppSelector, useAppDispatch } from '../hooks';
-import { changeTest, changeBool, selectTest, selectBool } from './TestSlice';
+import { ArchiveState, DirectoryOutbound } from './types';
 
 /* Bootstrap */
 import { Card, Button, Form, Row, Col } from 'react-bootstrap';
@@ -15,20 +13,14 @@ import TreeItem from '@mui/lab/TreeItem';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
-interface Archive {
-  title: string;
-  episodes: string[];
-}
-export interface ArchiveState extends Archive {
-  checkedEpisodes: number[];
-  // check episodes index
-}
-
-export interface DirectoryOutbound {
-  //(GET /directory Response)
-  titles: string[];
-  outbound: Archive[];
-}
+/* Redux */
+import {
+  changeTest,
+  changeBool,
+  selectTest,
+  useAppSelector,
+  useAppDispatch,
+} from './TestSlice';
 
 const DirectoryTreeView: React.FC = () => {
   return (
@@ -96,7 +88,6 @@ const DirectoryCard: React.FC = () => {
     []
   );
   const test = useAppSelector(selectTest);
-  const bool = useAppSelector(selectBool);
   const dispatch = useAppDispatch();
   useEffect(() => {
     //once excuse
@@ -145,12 +136,10 @@ const DirectoryCard: React.FC = () => {
       <br />
       {/* <DirectoryTreeView /> */}
       <br />
-      <Card bg="dark" key="directory-card" text="light">
+      <Card bg="dark" key="directory-card-redux-test" text="light">
         <Card.Header>Redux Test</Card.Header>
         <Card.Body>
           <code>{JSON.stringify(test)}</code>
-          <br />
-          <code>{JSON.stringify(bool)}</code>
           <br />
           {/* input */}
           <Form.Group controlId="formBasicEmail">
@@ -166,7 +155,10 @@ const DirectoryCard: React.FC = () => {
             Change Test to {text}
           </Button>
           <br />
-          <Button variant="primary" onClick={() => dispatch(changeBool(!bool))}>
+          <Button
+            variant="primary"
+            onClick={() => dispatch(changeBool(!test.ifbool))}
+          >
             Change Bool
           </Button>
         </Card.Body>

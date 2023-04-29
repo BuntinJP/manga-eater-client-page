@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { ArchiveState } from './DirectoryCard';
+import { ArchiveState } from './types';
 
 const initialState: ArchiveState[] = [];
 

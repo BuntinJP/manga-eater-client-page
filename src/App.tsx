@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import MainNav from './Components/MainNav';
 import ChannelCard from './Components/ChannelCard';
 import OperationCard from './Components/OperationCard';
@@ -11,16 +11,18 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <MainNav version="1.0.0" isLoading={isLoading} />
-      <Row>
-        <Col>
-          <DirectoryCard />
-        </Col>
-        <Col>
-          <ChannelCard isLoading={isLoading} setLoading={setLoading} />
-          <br />
-          <OperationCard />
-        </Col>
-      </Row>
+      <Container>
+        <Row>
+          <Col>
+            <DirectoryCard />
+          </Col>
+          <Col>
+            <ChannelCard isLoading={isLoading} setLoading={setLoading} />
+            <br />
+            <OperationCard />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };

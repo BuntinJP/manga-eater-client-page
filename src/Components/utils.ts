@@ -1,9 +1,4 @@
-import { DirectoryOutbound } from './DirectoryCard';
-
-interface ChannelInfo {
-  currentName: string;
-  alt?: string[];
-}
+import { ChannelInfo, DirectoryOutbound } from './types';
 
 const fetchChannelNames = async () => {
   const name = await fetch('http://localhost:3000/channel');

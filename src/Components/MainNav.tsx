@@ -17,7 +17,7 @@ const MainNav: React.FC<IMainNav> = ({ version, isLoading }) => {
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>{isLoading ? 'Loading...' : 'Ready'}</Navbar.Text>
+          <Navbar.Text>Stetas: {isLoading ? 'Loading...' : 'Idle'}</Navbar.Text>
         </Navbar.Collapse>
       </Container>
     </Navbar>
