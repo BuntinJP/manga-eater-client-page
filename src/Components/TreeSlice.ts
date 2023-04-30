@@ -22,6 +22,8 @@ const treeSlice = createSlice({
     initTree(state, action: PayloadAction<Node[]>) {
       state.filterd = action.payload;
       state.nodes = action.payload;
+      state.checked = [];
+      state.expanded = [];
     },
     setTree(state, action: PayloadAction<TreeState>) {
       state.filterd = action.payload.filterd;

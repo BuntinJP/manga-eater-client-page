@@ -14,8 +14,6 @@ const ChannelCard: React.FC<Props> = (prop) => {
   }); //discordチャンネル名
   useEffect(() => {
     utils.fetchChannelNames().then((channels) => {
-      console.log(`setChannel was called with ${channels.currentName}`);
-      console.log(channels);
       setChannel(channels);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
