@@ -1,13 +1,15 @@
-import { ChannelInfo, DirectoryOutbound } from './types';
+import { ChannelInfo, DirectoryOutbound, Checked } from './types';
+
+const url = 'http://localhost:3000';
 
 const fetchChannelNames = async () => {
-  const name = await fetch('http://localhost:3000/channel');
+  const name = await fetch(`${url}/channel`);
   const info = (await name.json()) as ChannelInfo;
   return info;
 };
 
 const fetchChannelChange = async (index: number) => {
-  const res = await fetch('http://localhost:3000/channel', {
+  const res = await fetch(`${url}/channel`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,10 +24,20 @@ const fetchChannelChange = async (index: number) => {
 };
 
 const fetchDirectory = async () => {
-  const res = await fetch('http://localhost:3000/directory');
+  const res = await fetch(`${url}/directory`);
   const directory = (await res.json()) as DirectoryOutbound;
   return directory;
 };
 
-export { fetchChannelNames, fetchChannelChange, fetchDirectory };
+const pushDirData = async (data: Checked[]) => {
+  fetch(`${url}/directory`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+};
+
+export { fetchChannelNames, fetchChannelChange, fetchDirectory, pushDirData };
 export type { ChannelInfo };

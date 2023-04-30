@@ -3,6 +3,7 @@ import CheckboxTree, { Node } from 'react-checkbox-tree';
 import 'react-checkbox-tree/src/scss/react-checkbox-tree.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useAppSelector, useAppDispatch } from '../store';
+import { selectLoad } from './LoadSlice';
 import {
   initTree,
   selectTree,
@@ -36,32 +37,7 @@ const stateInit = (dir: DirectoryOutbound) => {
   return state;
 };
 const FilterDirTree: React.FC = () => {
-  const fetchedNodes: Node[] = [
-    {
-      value: 'mars',
-      label: 'Mars',
-      children: [
-        { value: 'phobos', label: 'Phobos' },
-        { value: 'deimos', label: 'Deimos' },
-      ],
-    },
-    {
-      value: 'ttt',
-      label: 'ttt',
-      children: [
-        { value: 'tt', label: 'qwe' },
-        { value: 'qwe', label: 'ert' },
-      ],
-    },
-    {
-      value: '青木',
-      label: '青木',
-      children: [
-        { value: `は？`, label: 'は？' },
-        { value: 'どゆこと', label: 'どゆこと' },
-      ],
-    },
-  ];
+  const ifloading = useAppSelector(selectLoad);
   const tree = useAppSelector(selectTree);
   const dispatch = useAppDispatch();
   const nodes = tree.nodes;
@@ -71,14 +47,17 @@ const FilterDirTree: React.FC = () => {
       const state = stateInit(dir);
       console.log('state = ');
       console.log(state);
-      const fetchedNodesTemp: Node[] = state.map((archive) => {
+      const fetchedNodesTemp: Node[] = state.map((archive, index) => {
         return {
-          value: archive.title,
+          value: `${index}`,
           label: archive.title,
-          children: archive.episodes.map((episode) => {
+          children: archive.episodes.map((episode, childrenIndex) => {
+            const epInfo = episode.split('-');
+            const ep = epInfo[0];
+            const page = epInfo[1];
             return {
-              value: episode,
-              label: episode,
+              value: `${index} ${childrenIndex}`,
+              label: `${ep}, ${page}`,
             };
           }),
         };
@@ -88,7 +67,6 @@ const FilterDirTree: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    /* TODO:DLし、ディレクトリ構造が変わったら再度初期化を行う */
     console.log('TODO');
   }, []);
 
@@ -104,9 +82,7 @@ const FilterDirTree: React.FC = () => {
   };
 
   const filterNodes = (node: Node, filterText: string): Node | null => {
-    console.log('node.label = ' + node.label);
     if (typeof node.label !== 'string') {
-      console.log('node.label is not string');
       return null;
     }
     if (node.label.includes(filterText)) {
@@ -115,7 +91,7 @@ const FilterDirTree: React.FC = () => {
     return null;
   };
 
-  return (
+  const nonLoadComp: JSX.Element = (
     <div className="filter-container">
       <input
         className="filter-text"
@@ -209,8 +185,12 @@ const FilterDirTree: React.FC = () => {
       />
     </div>
   );
+  const loadingComp: JSX.Element = (
+    <div className="spinner-border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
+  );
+  return <>{ifloading ? loadingComp : nonLoadComp}</>;
 };
 
 export default FilterDirTree;
-// export Node as Node;
-export type { Node };

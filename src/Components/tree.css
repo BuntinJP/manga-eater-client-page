@@ -1,0 +1,18 @@
+.checkbox {
+  display: none;
+}
+.checkbox-fontas {
+  position: relative;
+  vertical-align: middle;
+  font-size: 21px;
+}
+.checkbox + .checkbox-fontas:before {
+  font-weight: 900;
+  font-family: 'Font Awesome 5 Free';
+  content: '\f0c8';
+  color: #ffff;
+}
+.checkbox:checked + .checkbox-fontas:before {
+  content: '\f14a';
+  color: #ffff;
+}

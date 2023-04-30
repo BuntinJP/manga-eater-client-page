@@ -7,17 +7,16 @@ import ChannelCard from './Components/ChannelCard';
 import OperationCard from './Components/OperationCard';
 import DirectoryCard from './Components/DirectoryCard';
 const App: React.FC = () => {
-  const [isLoading, setLoading] = React.useState<boolean>(false);
   return (
     <div className="App">
-      <MainNav version="1.0.0" isLoading={isLoading} />
+      <MainNav version="1.0.0" />
       <Container>
         <Row>
           <Col>
             <DirectoryCard />
           </Col>
           <Col>
-            <ChannelCard isLoading={isLoading} setLoading={setLoading} />
+            <ChannelCard />
             <br />
             <OperationCard />
           </Col>

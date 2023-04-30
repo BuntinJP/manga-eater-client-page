@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import testReducer from './Components/TestSlice';
 import DirectorySlice from './Components/DirectorySlice';
 import TreeSlice from './Components/TreeSlice';
+import ChannelSlice from './Components/ChannelSlice';
+import LoadSlice from './Components/LoadSlice';
 export const store = configureStore({
   reducer: {
-    test: testReducer,
     directory: DirectorySlice,
     tree: TreeSlice,
+    channel: ChannelSlice,
+    load: LoadSlice,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;

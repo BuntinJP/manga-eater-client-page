@@ -16,3 +16,15 @@ export interface ChannelInfo {
   currentName: string;
   alt?: string[];
 }
+
+export interface Checked {
+  index: number;
+  checked: number[];
+}
+
+export interface TreeState {
+  nodes: Node[];
+  filterd: Node[];
+  checked: string[];
+  expanded: string[];
+}

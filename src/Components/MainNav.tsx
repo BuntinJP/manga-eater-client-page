@@ -1,14 +1,15 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
+import { Container, Navbar } from 'react-bootstrap';
+import { useAppSelector } from '../store';
+import { selectLoad } from './LoadSlice';
 
 interface IMainNav {
   version: string;
-  isLoading?: boolean;
 }
 
-const MainNav: React.FC<IMainNav> = ({ version, isLoading }) => {
+const MainNav: React.FC<IMainNav> = ({ version }) => {
+  const isLoading = useAppSelector(selectLoad);
   return (
     <Navbar bg="dark" variant="dark">
       <Container>

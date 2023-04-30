@@ -7,16 +7,6 @@ import FilterDirTree from './FilterDirTree';
 /* Bootstrap */
 import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-/* 
-===========================================
-
-TODO
-現状TreeViewまでいけた
-TreeViewの中身node:Node[]と、DirectoryState:Archive[]を同期させる
-
-
-===========================================
-*/
 
 const DirectoryCard: React.FC = () => {
   return (

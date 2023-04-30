@@ -1,28 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Dropdown, Spinner } from 'react-bootstrap';
 import * as utils from './utils';
-import { ChannelInfo } from './types';
+import { useAppSelector, useAppDispatch } from '../store';
+import { selectLoad, setLoad } from './LoadSlice';
+import { selectChannel, setChannel } from './ChannelSlice';
 
-interface Props {
-  isLoading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const ChannelCard: React.FC<Props> = (prop) => {
-  const [channel, setChannel] = useState<ChannelInfo>({
-    currentName: '未取得',
-  }); //discordチャンネル名
+const ChannelCard: React.FC = () => {
+  const channel = useAppSelector(selectChannel);
+  const dispatch = useAppDispatch();
+  const ifload = useAppSelector(selectLoad);
   useEffect(() => {
     utils.fetchChannelNames().then((channels) => {
-      setChannel(channels);
+      dispatch(setChannel(channels));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const changeChannel = async (index: number) => {
-    prop.setLoading(true);
+    dispatch(setLoad(true));
     const dispatched = await utils.fetchChannelChange(index);
-    setChannel(dispatched);
-    prop.setLoading(false);
+    dispatch(setChannel(dispatched));
+    dispatch(setLoad(false));
   };
   return (
     <>
@@ -30,12 +27,8 @@ const ChannelCard: React.FC<Props> = (prop) => {
       <div className="card text-center bg-dark">
         <div className="card-header">
           <h5>
-            Discord Channel
-            <Spinner
-              animation="border"
-              variant="Light"
-              hidden={!prop.isLoading}
-            />
+            Channel
+            <Spinner animation="border" variant="Light" hidden={!ifload} />
           </h5>
         </div>
         <div className="card-body">
