@@ -87,7 +87,7 @@ const ChannelInfo: React.FC = () => {
           <td>
             {/* TODO 表示内容を表に敷き詰める */}
             {channel.alt?.map((alt, index) => {
-              return index < 3 ? <div key={index}>{alt}</div> : null;
+              return <div key={index}>{alt}</div>;
             })}
           </td>
         </tr>
@@ -152,26 +152,34 @@ const ChannelOps: React.FC = () => {
         </Dropdown.Menu>
       </Dropdown>
       <br />
-      <form>
-        <div className="mb-3">
-          <label htmlFor="channelID" className="form-label">
-            ChannelID(数字のみ)
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="channelID"
-            placeholder="ChannelID"
-            value={id}
-            onChange={(e) => {
-              setId(e.target.value);
-            }}
-          />
-        </div>
-        <button type="button" className="btn btn-primary" onClick={addChannel}>
-          追加
-        </button>
-      </form>
+      {checked ? (
+        <form>
+          <div className="mb-3">
+            <label htmlFor="channelID" className="form-label">
+              ChannelID(数字のみ)
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              id="channelID"
+              placeholder="ChannelID"
+              value={id}
+              onChange={(e) => {
+                setId(e.target.value);
+              }}
+            />
+          </div>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={addChannel}
+          >
+            追加
+          </button>
+        </form>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
