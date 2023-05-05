@@ -1,9 +1,10 @@
 import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../store';
 import { selectLoad, setLoad } from './LoadSlice';
 import { selectTree } from './TreeSlice';
+import { setShow } from './AlertSlice';
 import { pushDirData } from './utils';
 import { Checked } from './types';
 
@@ -32,6 +33,7 @@ const OperationCard: React.FC = () => {
   const check = () => {
     //check button clicked
     dispatch(setLoad(!ifloading));
+    //dispatch(setShow(true));
   };
   const push = () => {
     dispatch(setLoad(true));
@@ -55,15 +57,14 @@ const OperationCard: React.FC = () => {
     });
   };
   return (
-    <div className="card text-center bg-dark">
-      <div className="card-header">
+    <Card className="text-center bg-dark">
+      <Card.Header>
         <h5>Operation</h5>
-      </div>
-      <div className="card-body">
+      </Card.Header>
+      <Card.Body>
         <Button variant="light" onClick={push}>
           ALL Push
-        </Button>
-        {'  '}
+        </Button>{' '}
         <Button variant="light" onClick={check}>
           Check
         </Button>
@@ -77,8 +78,9 @@ const OperationCard: React.FC = () => {
             <Dropdown.Item>1</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-      </div>
-    </div>
+      </Card.Body>
+      <Card.Footer />
+    </Card>
   );
 };
 
