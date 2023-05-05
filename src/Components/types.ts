@@ -28,3 +28,8 @@ export interface TreeState {
   checked: string[];
   expanded: string[];
 }
+
+export interface Alert {
+  message: string;
+  show: boolean;
+}
