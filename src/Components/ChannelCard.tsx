@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Dropdown, Spinner } from 'react-bootstrap';
+import { Dropdown, Spinner, Container } from 'react-bootstrap';
 import * as utils from './utils';
 import { useAppSelector, useAppDispatch } from '../store';
 import { selectLoad, setLoad } from './LoadSlice';
@@ -96,6 +96,7 @@ const ChannelInfo: React.FC = () => {
   );
 };
 
+//channel card 操作コンポーネント
 const ChannelOps: React.FC = () => {
   const [checked, setChecked] = React.useState(false); //toggle button
   const channel = useAppSelector(selectChannel);
@@ -122,8 +123,9 @@ const ChannelOps: React.FC = () => {
     dispatch(setLoad(false));
   };
   return (
-    <>
+    <Container>
       <Stack spacing={2} direction="row" sx={{ alignItems: 'center' }}>
+        {/* space right */}
         <Typography>追加する</Typography>
         <IOSSwitch
           checked={checked}
@@ -132,8 +134,9 @@ const ChannelOps: React.FC = () => {
           }}
         />
       </Stack>
+      <br />
       <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle variant="light" id="dropdown-basic">
           チャンネルを変更
         </Dropdown.Toggle>
         <Dropdown.Menu>
@@ -153,34 +156,39 @@ const ChannelOps: React.FC = () => {
       </Dropdown>
       <br />
       {checked ? (
-        <form>
-          <div className="mb-3">
-            <label htmlFor="channelID" className="form-label">
-              ChannelID(数字のみ)
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="channelID"
-              placeholder="ChannelID"
-              value={id}
-              onChange={(e) => {
-                setId(e.target.value);
-              }}
-            />
-          </div>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={addChannel}
-          >
-            追加
-          </button>
-        </form>
+        <>
+          <form>
+            <div className="mb-3">
+              <label htmlFor="channelID" className="form-label">
+                ChannelID(数字のみ)
+              </label>
+              <input
+                className="form-control"
+                id="channelID"
+                placeholder="ChannelID"
+                value={id}
+                onChange={(e) => {
+                  if (!e.target.value.match(/^[0-9]*$/)) {
+                    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+                  }
+                  setId(e.target.value);
+                }}
+              />
+            </div>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={addChannel}
+            >
+              追加
+            </button>
+          </form>
+          <br />
+        </>
       ) : (
         <></>
       )}
-    </>
+    </Container>
   );
 };
 
@@ -201,7 +209,8 @@ const ChannelCard: React.FC = () => {
           )}
         </div>
         <ChannelOps />
-        <div className="card-footer text-muted">{/* textalign left */}</div>
+        {/* footer */}
+        <div className="card-footer text-muted"></div>
       </div>
       <br />
     </>

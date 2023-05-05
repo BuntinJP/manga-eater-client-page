@@ -19,6 +19,7 @@ const DirectoryCard: React.FC = () => {
         <Card.Body>
           <FilterDirTree />
         </Card.Body>
+        <Card.Footer />
       </Card>
       <br />
     </>
