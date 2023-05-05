@@ -57,7 +57,17 @@ const pushDirData = async (data: Checked[]) => {
   });
 };
 
+const pushUrl = async (pushUrl: string, ifPush: boolean) => {
+  fetch(`${url}/url`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ url: pushUrl, ifPush }),
+  });
+};
 export {
+  pushUrl,
   fetchChannelNames,
   fetchChannelChange,
   fetchDirectory,
