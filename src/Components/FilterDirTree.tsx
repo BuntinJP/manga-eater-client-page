@@ -23,7 +23,7 @@ import {
   faBook,
 } from '@fortawesome/free-solid-svg-icons';
 import { ArchiveState, DirectoryOutbound } from './types';
-import { fetchDirectory } from './utils';
+import { fetchDirectory, trimZero } from './utils';
 
 const stateInit = (dir: DirectoryOutbound) => {
   const archives = dir.outbound;
@@ -45,19 +45,17 @@ const FilterDirTree: React.FC = () => {
   useEffect(() => {
     fetchDirectory().then((dir) => {
       const state = stateInit(dir);
-      console.log('state = ');
-      console.log(state);
       const fetchedNodesTemp: Node[] = state.map((archive, index) => {
         return {
           value: `${index}`,
           label: archive.title,
           children: archive.episodes.map((episode, childrenIndex) => {
             const epInfo = episode.split('-');
-            const ep = epInfo[0];
+            const ep = trimZero(epInfo[0]);
             const page = epInfo[1];
             return {
               value: `${index} ${childrenIndex}`,
-              label: `${ep}, ${page}`,
+              label: `${ep} (${page}ページ)`,
             };
           }),
         };
@@ -65,9 +63,6 @@ const FilterDirTree: React.FC = () => {
       dispatch(initTree(fetchedNodesTemp));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  useEffect(() => {
-    console.log('TODO');
   }, []);
 
   const filterTree = (filterText: string) => {
