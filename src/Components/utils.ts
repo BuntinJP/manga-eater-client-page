@@ -1,7 +1,8 @@
+import { Checklist } from '@mui/icons-material';
 import { ChannelInfo, DirectoryOutbound, Checked } from './types';
 
-const url2 = 'http://localhost:11150';
-const url = 'https://manga.buntin.xyz';
+const url = 'http://localhost:11150';
+const url2 = 'https://manga.buntin.xyz';
 
 const getUrl = () => {
   return url;
@@ -57,6 +58,16 @@ const pushDirData = async (data: Checked[]) => {
   });
 };
 
+const deleteDirData = async (data: Checked[]) => {
+  return await fetch(`${url}/directory`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+};
+
 const pushUrl = async (pushUrl: string, ifPush: boolean) => {
   fetch(`${url}/url`, {
     method: 'POST',
@@ -83,7 +94,23 @@ const trimZero = (str: string) => {
   return str;
 };
 
+const convCheckList = (list: string[]) => {
+  // wazato kimoi kansuu kaitemasu
+  let checkedList: Checked[] = [];
+  list.forEach((i) => {
+    let [titleIndex, episodeIndex] = i.split(' ').map((i) => parseInt(i));
+    if (checkedList.findIndex((i) => i.index === titleIndex) === -1) {
+      checkedList.push({ index: titleIndex, checked: [episodeIndex] });
+    } else {
+      const index = checkedList.findIndex((i) => i.index === titleIndex);
+      checkedList[index].checked.push(episodeIndex);
+    }
+  });
+  return checkedList;
+};
+
 export {
+  convCheckList,
   trimZero,
   pushUrl,
   fetchChannelNames,
@@ -92,5 +119,6 @@ export {
   pushDirData,
   getUrl,
   fetchChannelAdd,
+  deleteDirData,
 };
 export type { ChannelInfo };

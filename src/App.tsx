@@ -6,15 +6,15 @@ import MainNav from './Components/MainNav';
 import ChannelCard from './Components/ChannelCard';
 import OperationCard from './Components/OperationCard';
 import DirectoryCard from './Components/DirectoryCard';
+import RemoveWarn from './Components/RemoveWarn';
 import UrlCard from './Components/UrlCard';
-import ErrorAlert from './Components/ErrorAlert';
 import Loading from './Components/Loading';
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <ErrorAlert />
       <Loading />
+      <RemoveWarn />
       <MainNav version="1.0.0" />
       <Container>
         <br />

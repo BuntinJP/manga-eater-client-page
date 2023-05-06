@@ -5,7 +5,7 @@ import { useAppSelector, useAppDispatch } from '../store';
 import { selectLoad, setLoad } from './LoadSlice';
 import { selectTree } from './TreeSlice';
 import { setShow } from './AlertSlice';
-import { pushDirData } from './utils';
+import * as utils from './utils';
 import { Checked } from './types';
 
 const checkIndex = (index: number, list: Checked[]) => {
@@ -32,29 +32,20 @@ const OperationCard: React.FC = () => {
   const tree = useAppSelector(selectTree);
   const check = () => {
     //check button clicked
-    dispatch(setLoad(!ifloading));
-    //dispatch(setShow(true));
+    //dispatch(setLoad(!ifloading));
+    dispatch(setShow(true));
   };
   const push = () => {
     dispatch(setLoad(true));
     const checked = tree.checked;
-    let pushList: Checked[] = [];
-    for (let i = 0; i < checked.length; i++) {
-      const t = checked[i].split(' ');
-      const index = parseInt(t[0]);
-      const episode = parseInt(t[1]);
-      let listIndex = -1;
-      if (!checkIndex(index, pushList)) {
-        pushList.push({ index: index, checked: [] });
-        listIndex = pushList.length - 1;
-      }
-      listIndex = indexOf(index, pushList);
-      pushList[listIndex].checked.push(episode);
-    }
-    pushDirData(pushList).then((res) => {
+    let pushList = utils.convCheckList(checked);
+    utils.pushDirData(pushList).then((res) => {
       console.log(res);
       dispatch(setLoad(false));
     });
+  };
+  const deleteOpen = () => {
+    dispatch(setShow(true));
   };
   return (
     <Card className="text-center bg-dark">
@@ -67,6 +58,9 @@ const OperationCard: React.FC = () => {
         </Button>{' '}
         <Button variant="light" onClick={check}>
           Check
+        </Button>{' '}
+        <Button variant="light" onClick={deleteOpen}>
+          Delete
         </Button>
         <br />
         <br />

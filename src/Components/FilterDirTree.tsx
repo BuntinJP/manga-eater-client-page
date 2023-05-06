@@ -42,7 +42,7 @@ const FilterDirTree: React.FC = () => {
   const dispatch = useAppDispatch();
   const nodes = tree.nodes;
   const [filterText, setFilterText] = useState<string>('');
-  useEffect(() => {
+  const loadTree = async () => {
     fetchDirectory().then((dir) => {
       const state = stateInit(dir);
       const fetchedNodesTemp: Node[] = state.map((archive, index) => {
@@ -62,8 +62,18 @@ const FilterDirTree: React.FC = () => {
       });
       dispatch(initTree(fetchedNodesTemp));
     });
+  };
+  useEffect(() => {
+    loadTree();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    if (ifloading) {
+      return;
+    }
+    loadTree();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ifloading]);
 
   const filterTree = (filterText: string) => {
     if (!filterText) {

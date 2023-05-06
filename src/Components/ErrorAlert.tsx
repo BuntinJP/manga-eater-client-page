@@ -1,5 +1,4 @@
 import React from 'react';
-import { Alert, Modal } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../store';
 import { selectAlert, setShow } from './AlertSlice';
 import './alert.css';
