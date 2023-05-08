@@ -1,7 +1,7 @@
 import { Checklist } from '@mui/icons-material';
 import { ChannelInfo, DirectoryOutbound, Checked } from './types';
 
-const url = 'http://localhost:11150';
+export const url = 'http://localhost:11150';
 const url2 = 'https://manga.buntin.xyz';
 
 const getUrl = () => {

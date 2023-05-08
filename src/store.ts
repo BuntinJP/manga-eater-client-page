@@ -5,6 +5,7 @@ import TreeSlice from './Components/TreeSlice';
 import ChannelSlice from './Components/ChannelSlice';
 import LoadSlice from './Components/LoadSlice';
 import AlertSlice from './Components/AlertSlice';
+import webSocketSlice from './Components/webSocketSlice';
 export const store = configureStore({
   reducer: {
     directory: DirectorySlice,
@@ -12,6 +13,7 @@ export const store = configureStore({
     channel: ChannelSlice,
     load: LoadSlice,
     alert: AlertSlice,
+    webSocket: webSocketSlice,
   },
 });
 export type RootState = ReturnType<typeof store.getState>;

@@ -7,27 +7,44 @@ import * as utils from './utils';
 
 const RemoveWarn: React.FC = () => {
   //local loading state
-  const [load, setLoad] = React.useState(false);
+  const [text, setText] = React.useState<string>('');
   const alert = useAppSelector(selectAlert);
   const tree = useAppSelector(selectTree);
   const dispatch = useAppDispatch();
+  React.useEffect(() => {
+    utils.fetchDirectory().then((dir) => {
+      let removePlan = '削除対象\n';
+      const checked = utils.convCheckList(tree.checked);
+
+      checked.forEach((item, i) => {
+        const outbound = dir.outbound[item.index]; //episode names
+        const { title, episodes } = outbound;
+        const checkedEpisodes = item.checked.map((index) => {
+          const t = episodes[index].split('-').shift() || 'bug occured';
+          return utils.trimZero(t);
+        });
+        removePlan += `${title}(${checkedEpisodes.join(', ')})${
+          i === checked.length - 1 ? '' : ', '
+        }`;
+      });
+
+      setText(removePlan);
+    });
+  }, [tree.checked]);
   const handleClose = () => {
     dispatch(setShow(false));
   };
   const deleteDir = () => {
-    setLoad(true);
     const checked = tree.checked;
     let pushList = utils.convCheckList(checked);
     utils
       .deleteDirData(pushList)
       .then((res) => {
         console.log(res);
-        setLoad(false);
         dispatch(setShow(false));
       })
       .catch((err) => {
         console.log(err);
-        setLoad(false);
         dispatch(setShow(false));
       });
   };
@@ -36,7 +53,7 @@ const RemoveWarn: React.FC = () => {
       <Modal.Header closeButton>
         <Modal.Title className="text-danger">警告</Modal.Title>
       </Modal.Header>
-      <Modal.Body>helo</Modal.Body>
+      <Modal.Body>{text}</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           戻る

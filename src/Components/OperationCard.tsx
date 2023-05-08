@@ -1,12 +1,13 @@
 import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { Button, Card } from 'react-bootstrap';
+import { Button, Card, Row, Col } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../store';
 import { selectLoad, setLoad } from './LoadSlice';
 import { selectTree } from './TreeSlice';
 import { setShow } from './AlertSlice';
 import * as utils from './utils';
 import { Checked } from './types';
+import WebSocketComponent from './WebSocketComp';
 
 const checkIndex = (index: number, list: Checked[]) => {
   for (let i = 0; i < list.length; i++) {
@@ -53,25 +54,32 @@ const OperationCard: React.FC = () => {
         <h5>Operation</h5>
       </Card.Header>
       <Card.Body>
-        <Button variant="light" onClick={push}>
-          ALL Push
-        </Button>{' '}
-        <Button variant="light" onClick={check}>
-          Check
-        </Button>{' '}
-        <Button variant="light" onClick={deleteOpen}>
-          Delete
-        </Button>
-        <br />
-        <br />
-        <Dropdown>
-          <Dropdown.Toggle variant="light" id="dropdown-basic">
-            チャンネルを変更
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item>1</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        <Row>
+          <Col>
+            <WebSocketComponent />
+          </Col>
+          <Col>
+            <Button variant="light" onClick={push}>
+              ALL Push
+            </Button>{' '}
+            <Button variant="light" onClick={check}>
+              Check
+            </Button>{' '}
+            <Button variant="light" onClick={deleteOpen}>
+              Delete
+            </Button>
+            <br />
+            <br />
+            <Dropdown>
+              <Dropdown.Toggle variant="light" id="dropdown-basic">
+                チャンネルを変更
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item>1</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Col>
+        </Row>
       </Card.Body>
       <Card.Footer />
     </Card>
