@@ -24,6 +24,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ArchiveState, DirectoryOutbound } from './types';
 import { fetchDirectory, trimZero } from './utils';
+import { selectServerStatus } from './webSocketSlice';
 
 const stateInit = (dir: DirectoryOutbound) => {
   const archives = dir.outbound;
@@ -39,6 +40,7 @@ const stateInit = (dir: DirectoryOutbound) => {
 const FilterDirTree: React.FC = () => {
   const ifloading = useAppSelector(selectLoad);
   const tree = useAppSelector(selectTree);
+  const serverStatus = useAppSelector(selectServerStatus);
   const dispatch = useAppDispatch();
   const nodes = tree.nodes;
   const [filterText, setFilterText] = useState<string>('');
@@ -73,7 +75,7 @@ const FilterDirTree: React.FC = () => {
     }
     loadTree();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ifloading]);
+  }, [serverStatus]);
 
   const filterTree = (filterText: string) => {
     if (!filterText) {

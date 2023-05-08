@@ -2,33 +2,13 @@ import React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { Button, Card, Row, Col } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../store';
-import { selectLoad, setLoad } from './LoadSlice';
+import { setLoad } from './LoadSlice';
 import { selectTree } from './TreeSlice';
 import { setShow } from './AlertSlice';
 import * as utils from './utils';
-import { Checked } from './types';
-import WebSocketComponent from './WebSocketComp';
-
-const checkIndex = (index: number, list: Checked[]) => {
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].index === index) {
-      return true;
-    }
-  }
-  return false;
-};
-
-const indexOf = (index: number, list: Checked[]) => {
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].index === index) {
-      return i;
-    }
-  }
-  return -1;
-};
+import ServerStatusComp from './ServerStatus';
 
 const OperationCard: React.FC = () => {
-  const ifloading = useAppSelector(selectLoad);
   const dispatch = useAppDispatch();
   const tree = useAppSelector(selectTree);
   const check = () => {
@@ -56,9 +36,11 @@ const OperationCard: React.FC = () => {
       <Card.Body>
         <Row>
           <Col>
-            <WebSocketComponent />
+            <ServerStatusComp />
           </Col>
           <Col>
+            <br />
+            <br />
             <Button variant="light" onClick={push}>
               ALL Push
             </Button>{' '}

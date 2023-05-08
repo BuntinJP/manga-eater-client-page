@@ -7,16 +7,18 @@ import {
   ServerStatus,
 } from './webSocketSlice';
 import * as utils from './utils';
+import { Table, Container } from 'react-bootstrap';
 
-const WebSocketComponent: React.FC = () => {
+const ServerStatusComp: React.FC = () => {
   const dispatch = useDispatch();
   const serverStatus = useSelector(selectServerStatus);
   let socket: Socket;
-  const url = utils.url + '/status';
-  socket = io(url);
+  const url = utils.url;
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    socket = io(url);
     socket.on('connect', () => {
-      console.log('client is successfully connected for The Depl Server.');
+      console.log('Successfully connected to server websocket');
     });
     socket.on('status', (status: { state: string; message: string }) => {
       const parsed = status as ServerStatus;
@@ -38,12 +40,24 @@ const WebSocketComponent: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <h3>WebSocket Status:</h3>
-      <p>State: {serverStatus.state}</p>
-      <p>Message: {serverStatus.message}</p>
-    </div>
+    <Container>
+      <h4>Server Status</h4>
+      <Table className="table-dark">
+        <thead>
+          <tr>
+            <th>state</th>
+            <th>message</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{serverStatus.state}</td>
+            <td>{serverStatus.message}</td>
+          </tr>
+        </tbody>
+      </Table>
+    </Container>
   );
 };
 
-export default WebSocketComponent;
+export default ServerStatusComp;
