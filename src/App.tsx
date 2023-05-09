@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Col, Container } from 'react-bootstrap';
 import MainNav from './Components/MainNav';
 import ChannelCard from './Components/ChannelCard';
-import OperationCard from './Components/OperationCard';
+import ServerStateCard from './Components/ServerStateCard';
 import DirectoryCard from './Components/DirectoryCard';
 import RemoveWarn from './Components/RemoveWarn';
 import UrlCard from './Components/UrlCard';
@@ -25,7 +25,7 @@ const App: React.FC = () => {
           </Col>
           <Col>
             <ChannelCard />
-            <OperationCard />
+            <ServerStateCard />
           </Col>
         </Row>
       </Container>

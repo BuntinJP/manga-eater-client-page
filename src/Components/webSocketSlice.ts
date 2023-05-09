@@ -1,13 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store';
+import { ServerStatus } from './types';
 
-export interface ServerStatus {
-  state: 'idle' | 'busy' | 'error';
-  message: string;
-}
 const initialState: ServerStatus = {
   state: 'idle',
   message: 'inited',
+  jobs: [],
 };
 
 const webSocketSlice = createSlice({
@@ -17,6 +15,7 @@ const webSocketSlice = createSlice({
     setServerStatus: (state, action: PayloadAction<ServerStatus>) => {
       state.state = action.payload.state;
       state.message = action.payload.message;
+      state.jobs = action.payload.jobs;
     },
   },
 });

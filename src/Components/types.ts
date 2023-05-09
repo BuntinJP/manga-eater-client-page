@@ -33,3 +33,15 @@ export interface Alert {
   message: string;
   show: boolean;
 }
+
+interface Jobs {
+  id: string;
+  title?: string;
+  progress?: number; // 0-100
+}
+
+export interface ServerStatus {
+  state: 'idle' | 'busy' | 'error';
+  message: string;
+  jobs?: Jobs[];
+}

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import CheckboxTree, { Node } from 'react-checkbox-tree';
-import 'react-checkbox-tree/src/scss/react-checkbox-tree.scss';
+import { Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ArchiveState, DirectoryOutbound } from './types';
+import { fetchDirectory, trimZero } from './utils';
+import OperationButtons from './OperationButtons';
+//Redux
 import { useAppSelector, useAppDispatch } from '../store';
 import { selectLoad } from './LoadSlice';
 import {
@@ -11,6 +14,10 @@ import {
   setExpanded,
   setFilterd,
 } from './TreeSlice';
+import { selectServerStatus } from './webSocketSlice';
+// React-Checkbox-Tree
+import CheckboxTree, { Node } from 'react-checkbox-tree';
+import 'react-checkbox-tree/src/scss/react-checkbox-tree.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare, faSquare } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -22,9 +29,6 @@ import {
   faBookOpen,
   faBook,
 } from '@fortawesome/free-solid-svg-icons';
-import { ArchiveState, DirectoryOutbound } from './types';
-import { fetchDirectory, trimZero } from './utils';
-import { selectServerStatus } from './webSocketSlice';
 
 const stateInit = (dir: DirectoryOutbound) => {
   const archives = dir.outbound;
@@ -100,17 +104,24 @@ const FilterDirTree: React.FC = () => {
 
   const nonLoadComp: JSX.Element = (
     <div className="filter-container">
-      <input
-        className="filter-text"
-        placeholder="タイトル検索"
-        type="text"
-        value={filterText}
-        onChange={(e) => {
-          const t = e.target.value;
-          setFilterText(t);
-          filterTree(t);
-        }}
-      />
+      <Row>
+        <Col md="auto">
+          <input
+            className="filter-text"
+            placeholder="タイトル検索"
+            type="text"
+            value={filterText}
+            onChange={(e) => {
+              const t = e.target.value;
+              setFilterText(t);
+              filterTree(t);
+            }}
+          />
+        </Col>
+        <Col md="auto">
+          <OperationButtons />
+        </Col>
+      </Row>
       <CheckboxTree
         checked={tree.checked}
         expanded={tree.expanded}

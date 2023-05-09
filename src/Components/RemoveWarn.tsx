@@ -6,7 +6,6 @@ import { selectTree } from './TreeSlice';
 import * as utils from './utils';
 
 const RemoveWarn: React.FC = () => {
-  //local loading state
   const [text, setText] = React.useState<string>('');
   const alert = useAppSelector(selectAlert);
   const tree = useAppSelector(selectTree);
@@ -15,7 +14,6 @@ const RemoveWarn: React.FC = () => {
     utils.fetchDirectory().then((dir) => {
       let removePlan = '削除対象\n';
       const checked = utils.convCheckList(tree.checked);
-
       checked.forEach((item, i) => {
         const outbound = dir.outbound[item.index]; //episode names
         const { title, episodes } = outbound;
@@ -27,7 +25,6 @@ const RemoveWarn: React.FC = () => {
           i === checked.length - 1 ? '' : ', '
         }`;
       });
-
       setText(removePlan);
     });
   }, [tree.checked]);
