@@ -31,9 +31,9 @@ const OperationButtons: React.FC = () => {
       <Button variant="light" onClick={push} size={size}>
         ALL Push
       </Button>{' '}
-      <Button variant="light" onClick={check} size={size}>
+      {/*       <Button variant="light" onClick={check} size={size}>
         Check
-      </Button>{' '}
+      </Button> */}{' '}
       <Button variant="light" onClick={deleteOpen} size={size}>
         Delete
       </Button>

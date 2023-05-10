@@ -7,6 +7,31 @@ import { ServerStatus } from './types';
 import * as utils from './utils';
 import { Table, Container, Card } from 'react-bootstrap';
 
+const TaskCard: React.FC = () => {
+  const serverStatus = useSelector(selectServerStatus);
+  let jobs = serverStatus.jobs || [];
+  //mock return
+  if (jobs.length === 0) {
+    return (
+      <tr>
+        <td>no jobs</td>
+      </tr>
+    );
+  }
+  return (
+    <>
+      {jobs.map((job, index) => {
+        return (
+          <tr key={index}>
+            <td>{job.title || 'fetching...'}</td>
+            <td>{job.progress?.toString() || 'fetching...'}</td>
+          </tr>
+        );
+      })}
+    </>
+  );
+};
+
 const ServerStateCard: React.FC = () => {
   const dispatch = useDispatch();
   const serverStatus = useSelector(selectServerStatus);
@@ -46,15 +71,12 @@ const ServerStateCard: React.FC = () => {
           <Table className="table-dark">
             <thead>
               <tr>
-                <th>state</th>
-                <th>message</th>
+                <th>title</th>
+                <th>progress</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>hello</td>
-                <td></td>
-              </tr>
+              <TaskCard />
             </tbody>
           </Table>
         </Container>
