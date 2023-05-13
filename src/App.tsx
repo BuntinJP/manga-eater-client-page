@@ -15,7 +15,7 @@ const App: React.FC = () => {
     <div className="App">
       <Loading />
       <RemoveWarn />
-      <MainNav version="1.0.0" />
+      <MainNav version="2.24.12" />
       <Container>
         <br />
         <UrlCard />
