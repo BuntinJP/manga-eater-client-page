@@ -7,9 +7,9 @@ import Typography from '@mui/material/Typography';
 
 import * as utils from './utils';
 import { useAppSelector, useAppDispatch } from '../store';
-import { setLoad } from './LoadSlice';
-import { setChannel } from './ChannelSlice';
-import { selectLoad, selectChannel } from './stateSelector';
+import { setLoad } from './redux/LoadSlice';
+import { setChannel } from './redux/ChannelSlice';
+import { selectLoad, selectChannel } from './redux/stateSelector';
 
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />

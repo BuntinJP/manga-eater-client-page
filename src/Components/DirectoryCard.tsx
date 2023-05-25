@@ -1,5 +1,4 @@
 import React from 'react';
-import '../App.css';
 
 /* Components */
 import FilterDirTree from './FilterDirTree';

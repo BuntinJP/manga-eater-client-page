@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../store';
-import { selectTree } from './stateSelector';
-import { setShow } from './AlertSlice';
+import { selectTree } from './redux/stateSelector';
+import { setShow } from './redux/AlertSlice';
 import * as utils from './utils';
-import { setLoad } from './LoadSlice';
+import { setLoad } from './redux/LoadSlice';
 
 const OperationButtons: React.FC = () => {
   const size = 'sm';

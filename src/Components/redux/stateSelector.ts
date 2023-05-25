@@ -1,4 +1,4 @@
-import { RootState } from '../store';
+import { RootState } from '../../store';
 
 export const selectChannel = (state: RootState) => state.channel;
 export const selectAlert = (state: RootState) => state.alert;

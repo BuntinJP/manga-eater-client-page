@@ -1,8 +1,8 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../store';
-import { setShow } from './AlertSlice';
-import { selectAlert } from './stateSelector';
-import './alert.css';
+import { setShow } from './redux/AlertSlice';
+import { selectAlert } from './redux/stateSelector';
+import './styles/alert.css';
 
 const ErrorAlert: React.FC = () => {
   const alert = useAppSelector(selectAlert);

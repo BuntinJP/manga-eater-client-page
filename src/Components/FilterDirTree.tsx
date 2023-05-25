@@ -5,8 +5,17 @@ import { fetchDirectory, trimZero } from './utils';
 import OperationButtons from './OperationButtons';
 //Redux
 import { useAppSelector, useAppDispatch } from '../store';
-import { initTree, setChecked, setExpanded, setFilterd } from './TreeSlice';
-import { selectLoad, selectTree, selectServerStatus } from './stateSelector';
+import {
+  initTree,
+  setChecked,
+  setExpanded,
+  setFilterd,
+} from './redux/TreeSlice';
+import {
+  selectLoad,
+  selectTree,
+  selectServerStatus,
+} from './redux/stateSelector';
 // React-Checkbox-Tree
 import CheckboxTree, { Node } from 'react-checkbox-tree';
 import 'react-checkbox-tree/src/scss/react-checkbox-tree.scss';

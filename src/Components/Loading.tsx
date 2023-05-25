@@ -1,7 +1,7 @@
 import React from 'react';
-import './loading.css';
+import './styles/loading.css';
 import { useAppSelector } from '../store';
-import { selectLoad } from './stateSelector';
+import { selectLoad } from './redux/stateSelector';
 
 const Loading: React.FC = () => {
   const ifloading = useAppSelector(selectLoad);
