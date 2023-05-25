@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
 import { Node } from 'react-checkbox-tree';
 
 interface TreeState {
@@ -41,9 +40,6 @@ const treeSlice = createSlice({
     },
   },
 });
-
-//selector
-export const selectTree = (state: RootState) => state.tree;
 
 export const { initTree, setTree, setChecked, setExpanded, setFilterd } =
   treeSlice.actions;

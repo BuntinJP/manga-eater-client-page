@@ -1,7 +1,7 @@
 import React from 'react';
 import './loading.css';
 import { useAppSelector } from '../store';
-import { selectLoad } from './LoadSlice';
+import { selectLoad } from './stateSelector';
 
 const Loading: React.FC = () => {
   const ifloading = useAppSelector(selectLoad);

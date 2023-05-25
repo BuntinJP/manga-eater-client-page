@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-import { ArchiveState } from './types';
 
 const initialState: ArchiveState[] = [];
 
@@ -28,9 +26,6 @@ const directorySlice = createSlice({
     },
   },
 });
-
-//selector
-export const selectDirectory = (state: RootState) => state.directory;
 
 export const { init, addDirectory, removeDirectory, editDirectory } =
   directorySlice.actions;

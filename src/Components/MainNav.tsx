@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Navbar } from 'react-bootstrap';
 import { useAppSelector } from '../store';
-import { selectLoad } from './LoadSlice';
+import { selectLoad } from './stateSelector';
 import { getUrl } from './utils';
 
 interface IMainNav {

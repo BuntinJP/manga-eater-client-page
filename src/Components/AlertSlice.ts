@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-import { Alert } from './types';
 
 const initialState: Alert = {
   message: '変なこといれてんじゃねえよカスが',
@@ -19,8 +17,6 @@ const alertSlice = createSlice({
     },
   },
 });
-
-export const selectAlert = (state: RootState) => state.alert;
 
 export const { setMessage, setShow } = alertSlice.actions;
 

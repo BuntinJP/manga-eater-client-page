@@ -1,5 +1,3 @@
-import { ChannelInfo, DirectoryOutbound, Checked } from './types';
-
 export const url = 'http://localhost:11150';
 //export const url = 'https://manga.buntin.xyz';
 
@@ -120,4 +118,3 @@ export {
   fetchChannelAdd,
   deleteDirData,
 };
-export type { ChannelInfo };

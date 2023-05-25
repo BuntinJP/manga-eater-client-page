@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
 
 const initialState = {
   load: false,
@@ -14,8 +13,6 @@ const loadSlice = createSlice({
     },
   },
 });
-
-export const selectLoad = (state: RootState) => state.load.load;
 
 export const { setLoad } = loadSlice.actions;
 

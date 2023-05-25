@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { Dropdown, Spinner, Container } from 'react-bootstrap';
-import * as utils from './utils';
-import { useAppSelector, useAppDispatch } from '../store';
-import { selectLoad, setLoad } from './LoadSlice';
-import { selectChannel, setChannel } from './ChannelSlice';
 import { styled } from '@mui/material/styles';
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+
+import * as utils from './utils';
+import { useAppSelector, useAppDispatch } from '../store';
+import { setLoad } from './LoadSlice';
+import { setChannel } from './ChannelSlice';
+import { selectLoad, selectChannel } from './stateSelector';
 
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />

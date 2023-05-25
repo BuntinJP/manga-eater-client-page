@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../store';
-import { selectTree } from './TreeSlice';
+import { selectTree } from './stateSelector';
 import { setShow } from './AlertSlice';
 import * as utils from './utils';
 import { setLoad } from './LoadSlice';

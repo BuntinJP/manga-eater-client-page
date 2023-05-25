@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { ArchiveState, DirectoryOutbound } from './types';
 import { fetchDirectory, trimZero } from './utils';
 import OperationButtons from './OperationButtons';
 //Redux
 import { useAppSelector, useAppDispatch } from '../store';
-import { selectLoad } from './LoadSlice';
-import {
-  initTree,
-  selectTree,
-  setChecked,
-  setExpanded,
-  setFilterd,
-} from './TreeSlice';
-import { selectServerStatus } from './webSocketSlice';
+import { initTree, setChecked, setExpanded, setFilterd } from './TreeSlice';
+import { selectLoad, selectTree, selectServerStatus } from './stateSelector';
 // React-Checkbox-Tree
 import CheckboxTree, { Node } from 'react-checkbox-tree';
 import 'react-checkbox-tree/src/scss/react-checkbox-tree.scss';

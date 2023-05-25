@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { io, Socket } from 'socket.io-client';
-import { setServerStatus, selectServerStatus } from './webSocketSlice';
-import { ServerStatus } from './types';
+import { setServerStatus } from './webSocketSlice';
+import { selectServerStatus } from './stateSelector';
 
 import * as utils from './utils';
 import { Table, Container, Card } from 'react-bootstrap';

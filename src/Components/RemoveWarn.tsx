@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../store';
-import { selectAlert, setShow } from './AlertSlice';
-import { selectTree } from './TreeSlice';
+import { setShow } from './AlertSlice';
+import { selectTree, selectAlert } from './stateSelector';
 import * as utils from './utils';
 
 const RemoveWarn: React.FC = () => {

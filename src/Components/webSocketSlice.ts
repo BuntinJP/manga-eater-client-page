@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-import { ServerStatus } from './types';
 
 const initialState: ServerStatus = {
   state: 'idle',
@@ -19,8 +17,6 @@ const webSocketSlice = createSlice({
     },
   },
 });
-
-export const selectServerStatus = (state: RootState) => state.webSocket;
 
 export const { setServerStatus } = webSocketSlice.actions;
 

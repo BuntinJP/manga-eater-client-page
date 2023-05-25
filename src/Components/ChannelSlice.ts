@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-import { ChannelInfo } from './types';
 
 const initialState: ChannelInfo = {
   currentName: '',
@@ -17,8 +15,6 @@ const channelSlice = createSlice({
     },
   },
 });
-
-export const selectChannel = (state: RootState) => state.channel;
 
 export const { setChannel } = channelSlice.actions;
 

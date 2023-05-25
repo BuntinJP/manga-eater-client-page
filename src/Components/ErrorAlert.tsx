@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../store';
-import { selectAlert, setShow } from './AlertSlice';
+import { setShow } from './AlertSlice';
+import { selectAlert } from './stateSelector';
 import './alert.css';
 
 const ErrorAlert: React.FC = () => {
