@@ -1,5 +1,5 @@
-//export const url = 'http://localhost:11150';
-export const url = 'https://manga.buntin.xyz';
+export const url = 'http://localhost:11150';
+//export const url = 'https://manga.buntin.xyz';
 
 const getUrl = () => {
   return url;
